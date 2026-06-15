@@ -1,0 +1,59 @@
+﻿<Application x:Class="Budget_Planner_Alnur_Madiyev_w68646.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Budget_Planner_Alnur_Madiyev_w68646"
+             xmlns:viewModel= "clr-namespace:Budget_Planner_Alnur_Madiyev_w68646.MVVM.ViewModel"
+             xmlns:view="clr-namespace:Budget_Planner_Alnur_Madiyev_w68646.MVVM.View"
+             StartupUri="Main_Window.xaml">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <!--define created themes as resource dictionaries-->
+            <ResourceDictionary.MergedDictionaries> 
+                <ResourceDictionary Source="Theme/Menu_Button_Theme.xaml"/>
+                <ResourceDictionary Source="Theme/Close_Button_Theme.xaml"/>
+                <ResourceDictionary Source="Theme/Light_Dark_Theme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <!--error template to display error message from Validation Rule -->
+            <ControlTemplate x:Key="error_Template">
+                <Border BorderBrush="#FF693E" BorderThickness="3"
+                        Background="{TemplateBinding Background}"
+                        Margin="-2,-2,-2,-2"
+                        CornerRadius="0,0,8,8">
+                    <Grid>
+                        <AdornedElementPlaceholder/>
+                        <TextBlock Text="{Binding [0].ErrorContent}" Foreground="#FF693E" Width="178"
+                               VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="WrapWithOverflow"
+                               FontWeight="Bold" FontFamily="Century Gothic" FontStyle="Italic"
+                               Margin="0,26,0,0"/>
+                    </Grid>
+                </Border>
+                <!--Define viewModel and their views-->
+            </ControlTemplate>
+            <DataTemplate DataType="{x:Type  viewModel:Home_ViewModel}">
+                <view:Home_View/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type  viewModel:Create_Budget_ViewModel}">
+                <view:Create_Budget_View/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type  viewModel:Expenses_ViewModel}">
+                <view:Expenses_View/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:Accommodation_ViewModel}">
+                <view:Home_Loan_View/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:Rent_ViewModel}">
+                <view:Rent_View/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:Vehicle_ViewModel}">
+                <view:Vehicle_View/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:Report_ViewModel}">
+                <view:Report_View/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:Comming_Soon_ViewModel}">
+                <view:Comming_Soon/>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

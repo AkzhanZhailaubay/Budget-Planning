@@ -1,0 +1,94 @@
+﻿<Window x:Class="Budget_Planner_Alnur_Madiyev_w68646.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModel= "clr-namespace:Budget_Planner_Alnur_Madiyev_w68646.MVVM.ViewModel"
+        mc:Ignorable="d"
+        Height="600" Width="920"
+        ResizeMode="NoResize"
+        Background="Transparent" Cursor="Arrow"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Normal"
+        Opacity="0.99"
+        AllowsTransparency="True">
+    <!--set Window style-->
+    
+    <Window.DataContext>
+        <viewModel:Main_ViewModel/>
+    </Window.DataContext>
+    <!--give window a datacontext set it to be Main_ViewModel-->
+    
+    <Border CornerRadius="15"  >
+        <!--create border with rounded corners--> 
+        <Grid Margin="7,0,-7,0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="720"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"/>
+                <RowDefinition Height="450"/>
+                <RowDefinition Height="70"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Budget_Planner_Alnur_Madiyev_w68646" VerticalAlignment="Top" HorizontalAlignment="Left"
+                    Foreground="#FF693E" Margin="20,24,0,0" Height="50" Width="166" Opacity="0.98"
+                    FontSize="22" FontWeight="Bold" FontFamily="Century Gothic" FontStyle="Italic"/>
+
+            <StackPanel Grid.Row="1" >
+                <RadioButton x:Name="rd_Home" Content="Home" 
+                                 FontSize="18"  Height="80" IsChecked="True"
+                                 Style="{StaticResource Menu_Button_Theme}" Checked="Rd_Home_Checked" 
+                                 Command="{Binding Home_Command }"/>
+                <!--bind Home_Command and give style to RadioButton-->
+                <RadioButton x:Name="rd_Budget_" Content="Create Budget"  
+                                 FontSize="18" Height="80" x:FieldModifier="public"
+                                 Style="{StaticResource Menu_Button_Theme}" Checked="Rd_Budget_Checked" 
+                                 Command="{Binding Create_Command}"/>
+                <!--bind Create_Command and give style to RadioButton-->
+            </StackPanel>
+
+            <Button x:Name="btn_Close" Content="Close"
+                        BorderThickness="0" FontSize="22" 
+                        Style="{StaticResource Close_Button_Theme}" 
+                        FontWeight="Bold" Cursor="Hand" FontFamily="Century Gothic" 
+                        FontStyle="Italic" Grid.Column="1"
+                        Height="50" Width="166" 
+                        HorizontalAlignment="Left"  VerticalAlignment="Top"
+                        Margin="610,14,0,0" Click="Btn_Close_Click"  />
+            <!--give button close button style-->
+
+            <ContentControl Grid.Row="0"
+                            Grid.Column="1"
+                            Grid.RowSpan="3"
+                            Content="{Binding Current_View}"/>
+            <!--content control will show current view--> 
+
+            <CheckBox x:Name="cb_Dark" 
+                      HorizontalAlignment="Left" Grid.Row="2"
+                      FontWeight="Bold" Cursor="Hand" FontFamily="Century Gothic"
+                      Style="{StaticResource Light_Dark_Theme}"
+                      Height="75" Width="200"
+                      FontStyle="Italic" FontSize="22" Checked="Cb_Dark_Checked"  />
+            <!--checkbox will trigger dark mode or light mode on all views-->
+
+        </Grid>
+        <Border.Style>
+            <!--style border background and trigger for dark mode-->
+            <Style TargetType="{x:Type Border}">
+                <Style.Setters>
+                    <Setter Property="Background" Value="#ECEEEF"/>
+                </Style.Setters>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding ElementName=cb_Dark, Path=IsChecked}" Value="True">
+                        <Setter Property="Background"  Value="#30363E"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Border.Style>
+    </Border>
+
+</Window>
