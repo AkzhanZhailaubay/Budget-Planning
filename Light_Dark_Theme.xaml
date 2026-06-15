@@ -1,0 +1,66 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!--set styling for Dark mode Toggle button-->
+    <Style BasedOn="{StaticResource {x:Type ToggleButton}}"
+           TargetType="{x:Type CheckBox}"
+           x:Key="Light_Dark_Theme">
+        <Style.Setters>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <Border CornerRadius="0,20,0,20"
+                                Background="{TemplateBinding Background}">
+
+                            <Grid VerticalAlignment="Stretch"
+                                  HorizontalAlignment="Stretch "
+                                  Cursor="None"
+                                   Background="Transparent">
+                                <!--text bound to TextBlock content in view  -->
+                                <TextBlock Text="{TemplateBinding Property=Content}"
+                                           VerticalAlignment="Center"
+                                           Foreground="{TemplateBinding Foreground}"
+                                           FontStyle="Italic"
+                                           Cursor="None"
+                                           FontWeight="Bold"
+                                           FontFamily="Century Gothic" 
+                                           Margin="20,10,0,10"/>
+                                <!--template bind background and foreground to change in dark mode-->
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <!--set default of content to be Dark Mode-->
+            <Setter Property="Content" Value="Dark Mode" />
+            <Setter Property="Foreground"  Value="#414A54"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <!--set default values for foreground and background-->
+        </Style.Setters>
+        <!--change template binding properties when-->
+        <Style.Triggers>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Foreground"  Value="#D8DDE8"/>
+                <Setter Property="Content" Value="Light Mode" />
+                <!--change when button checked then-->
+                <!--set content to be Light Mode-->
+            </Trigger>
+            <Trigger Property="Button.IsMouseOver"  Value="True">
+                <Setter Property="Background" Value="#E4E6E7"/>
+                <Setter Property="Foreground"  Value="#FF693E"/>
+                <!--if mouse is over then-->
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsChecked" Value="True"/>
+                    <Condition Property="Button.IsMouseOver"  Value="True"/>
+                    <!--if mouse is over and checked then-->
+                </MultiTrigger.Conditions>
+                <MultiTrigger.Setters>
+                    <Setter Property="Foreground"  Value="#D8DDE8"/>
+                    <Setter Property="Background" Value="#343B44"/>
+                </MultiTrigger.Setters>
+            </MultiTrigger>
+        </Style.Triggers>
+
+    </Style>
+</ResourceDictionary>

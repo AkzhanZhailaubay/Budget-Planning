@@ -1,0 +1,58 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!--Styling for buttons-->
+    <Style BasedOn="{StaticResource {x:Type Button}}" 
+           TargetType="{x:Type Button}" 
+           x:Key="Close_Button_Theme">
+        <Style.Setters>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="0,0,0,20"
+                                Background="{TemplateBinding Background}">
+                            <Grid VerticalAlignment="Stretch"
+                                  HorizontalAlignment="Stretch"
+                                  Cursor="None"
+                                  Background="Transparent">
+                                
+                                <!--text bound to TextBlock content in view  -->
+                                <TextBlock Text="{TemplateBinding Property=Content}"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"
+                                           Cursor="None"
+                                           Foreground="{TemplateBinding Foreground}"
+                                           Margin="20,0,0,0"/>
+                                <!--template bind background and foreground to change in dark mode-->
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+                <!--set default values for foreground and background-->
+            </Setter>
+            <Setter Property="Foreground"  Value="#414A54"/>
+            <Setter Property="Background" Value="Transparent"/>
+        </Style.Setters>
+        <!--change template binding properties when-->
+        <Style.Triggers>
+            <Trigger Property="Button.IsMouseOver"  Value="True">
+                <Setter Property="Foreground"  Value="#FF693E"/>
+                <!--if mouse is over then-->
+            </Trigger>
+            <DataTrigger Binding="{Binding ElementName=cb_Dark, Path=IsChecked}" Value="True">
+                <Setter Property="Foreground"  Value="#D8DDE8"/>
+                <!--when in dark mode foreground changes-->
+            </DataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=cb_Dark, Path=IsChecked}" Value="True"/>
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}" Value="True"/>
+                    <!--if in dark mode and mouse is over-->
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.Setters>
+                    <Setter Property="Foreground"  Value="#FF693E"/>
+                </MultiDataTrigger.Setters>
+            </MultiDataTrigger>
+        </Style.Triggers>
+        
+    </Style>
+</ResourceDictionary>
